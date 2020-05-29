@@ -61,7 +61,7 @@ export default function IndexPage() {
   return (
     <ReactQueryConfigProvider config={queryConfig}>
       <div className='bg-orange-100'>
-        <main className='container py-8 mx-auto space-y-5 '>
+        <main className='container px-4 py-8 mx-auto space-y-5 '>
           <h1 className="text-center text-red-600 text-10xl font-chelsea">Pokédex</h1>
           <PokemonList ></PokemonList>
         </main>
