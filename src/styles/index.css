@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Chelsea+Market&display=swap");
+
+.text-10xl {
+  font-size: 56px;
+}
+
+.font-chelsea {
+  font-family: "Chelsea Market", cursive;
+}
