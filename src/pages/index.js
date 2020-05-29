@@ -11,34 +11,33 @@ const Api = {
 const Type = ({ type }) => {
   return (
     <div>
-      <span className="text-xs font-semibold leading-3 tracking-wide uppercase">{type.type.name}</span>
+      <span className="text-xs font-semibold leading-3 tracking-wide uppercase">{type.name}</span>
     </div>
   )
 }
 
 const Pokmeon = ({ nr }) => {
-  const { status, data, error } = useQuery(['pokemon', nr], Api.pokemon);
+  const { status, data } = useQuery(['pokemon', nr], Api.pokemon);
 
   if (status === 'loading') {
-    return 'Skeleton loading ...';
+    return <div className='rounded loading' />;
   }
 
-  const { types, sprites: { front_default } } = data;
+  const { types } = data;
   const combinedType = data.types.reduce((backgroundColor, type) => {
     backgroundColor += type.type.name;
     return backgroundColor;
   }, '');
-  console.log(combinedType)
   const background = colors[combinedType] ?? 'pink';
 
   return (
-    <div className='p-4 space-y-1 transition-transform duration-300 ease-in-out transform rounded-md shadow-lg cursor-pointer hover:scale-110' style={{ background }}>
-      <img className="mx-auto" src={`https://img.pokemondb.net/sprites/home/normal/${data.name}.png`} alt={data.name}></img>
+    <div className='p-4 space-y-1 transition-transform duration-300 ease-in-out transform rounded-md shadow-lg cursor-pointer pokemon-box hover:scale-110' style={{ background }}>
+      <img style={{ width: 128, height: 128 }} className="mx-auto" src={`https://img.pokemondb.net/sprites/home/normal/${data.name}.png`} alt={data.name}></img>
       <h1 className="text-lg font-bold text-center capitalize">
         {data.name}
       </h1>
       <div className='flex justify-center space-x-2'>
-        {types.map(type => <Type type={type} />)}
+        {types.map(({ type }) => <Type key={type.name} type={type} />)}
       </div>
     </div>
   )
