@@ -19,8 +19,6 @@ const Type = ({ type }) => {
 const Pokmeon = ({ nr }) => {
   const { status, data, error } = useQuery(['pokemon', nr], Api.pokemon);
 
-  console.log(data)
-
   if (status === 'loading') {
     return 'Skeleton loading ...';
   }
