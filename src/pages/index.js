@@ -1,4 +1,3 @@
-import { ReactQueryConfigProvider } from "react-query";
 import Link from "next/link";
 import { colors, Pokedex } from "config";
 import { usePokemon } from "utils/hooks";
@@ -71,13 +70,9 @@ const PokemonList = () => {
 };
 
 export default function IndexPage() {
-  const queryConfig = { refetchAllOnWindowFocus: false };
-
   return (
-    <ReactQueryConfigProvider config={queryConfig}>
-      <article className="container px-4 py-8 mx-auto space-y-5 md:px-0 ">
-        <PokemonList />
-      </article>
-    </ReactQueryConfigProvider>
+    <article className="container px-4 py-8 mx-auto space-y-5 md:px-0 ">
+      <PokemonList />
+    </article>
   );
 }

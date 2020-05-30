@@ -70,7 +70,7 @@ const PokemonDetail = () => {
           <div className="text-3xl">
             <h1 className="inline capitalize">{names[5].name}</h1> /{" "}
             {types.map(({ type }) => (
-              <span key={type.name} type={type}>
+              <span className="mr-2" key={type.name} type={type}>
                 {type.name}
               </span>
             ))}

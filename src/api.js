@@ -12,6 +12,9 @@ const Api = {
   evolutionChain: (key) => {
     return fetch(key).then((res) => res.json());
   },
+  types: () => {
+    return fetch(`https://pokeapi.co/api/v2/type`).then((res) => res.json());
+  },
 };
 
 export default Api;
