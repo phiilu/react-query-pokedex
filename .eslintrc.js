@@ -19,6 +19,11 @@ module.exports = {
     react: {
       version: "detect",
     },
+    "import/resolver": {
+      node: {
+        paths: ["src"],
+      },
+    },
   },
   parserOptions: {
     ecmaFeatures: {

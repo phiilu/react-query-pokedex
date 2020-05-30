@@ -3,13 +3,18 @@ import Link from "next/link";
 
 const Layout = ({ children }) => {
   return (
-    <div>
+    <div
+      className="grid min-h-screen"
+      style={{ gridTemplateRows: "auto 1fr auto" }}
+    >
       <header>
-        <nav>
-          <ul>
+        <nav className="bg-red-600 shadow-xl">
+          <ul className="container py-3 mx-auto">
             <li>
-              <Link to="/">
-                <a>Pokedex</a>
+              <Link href="/">
+                <a className="text-2xl font-bold tracking-wider text-white uppercase">
+                  Pokedex
+                </a>
               </Link>
             </li>
           </ul>
