@@ -5,7 +5,7 @@ import { getCombinedType } from "utils/pokemon";
 import { usePokemon } from "utils/hooks";
 
 const SectionHeading = ({ children }) => {
-  return <h1 className="text-lg font-semibold">{children}</h1>;
+  return <h2 className="text-2xl font-semibold">{children}</h2>;
 };
 
 const PokemonDetail = () => {
@@ -16,13 +16,10 @@ const PokemonDetail = () => {
     return <p>Loading ...</p>;
   }
 
-  // console.log(status, data);
-
   const { types, moves } = data.pokemon;
   const { names } = data.species;
   const { chain } = data.evolutionChain;
-
-  console.log({ data });
+  const hasEvolution = chain.evolves_to.length > 0;
 
   const renderEvolutionChain = (evolves_to) => {
     const evolutions = evolves_to.map((evolution) => {
@@ -56,61 +53,62 @@ const PokemonDetail = () => {
   };
 
   return (
-    <article className="container px-4 py-8 mx-auto space-y-5 md:px-0 ">
-      <div
-        className="grid p-6 rounded-md shadow-xl md:grid-cols-2"
-        style={{ background: colors[getCombinedType(types)] }}
-      >
-        <img
-          src={`https://img.pokemondb.net/sprites/home/normal/${name}.png`}
-          alt={name}
-          className="mx-auto"
-        />
-        <div>
+    <div
+      className="min-h-full"
+      style={{ background: colors[getCombinedType(types)] }}
+    >
+      <article className="container px-4 py-8 mx-auto space-y-5 md:px-0">
+        <section>
           <div className="text-3xl">
-            <h1 className="inline capitalize">{names[5].name}</h1> /{" "}
+            <h1 className="inline font-bold capitalize">{names[5].name}</h1> /{" "}
             {types.map(({ type }) => (
               <span className="mr-2" key={type.name} type={type}>
                 {type.name}
               </span>
             ))}
           </div>
-        </div>
-      </div>
 
-      <section>
-        <SectionHeading>Evolution Chain</SectionHeading>
-        <ul className="flex">
-          <li>
-            <img
-              src={`https://img.pokemondb.net/sprites/home/normal/${chain.species.name}.png`}
-              alt={chain.species.name}
-            />
-          </li>
-          {renderEvolutionChain(chain.evolves_to)}
-        </ul>
-      </section>
+          <img
+            src={`https://img.pokemondb.net/sprites/home/normal/${name}.png`}
+            alt={name}
+            className="mx-auto"
+          />
+        </section>
 
-      <section>
-        <SectionHeading>Moves</SectionHeading>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody>
+        {hasEvolution && (
+          <section className="space-y-4">
+            <SectionHeading>Evolution Chain</SectionHeading>
+            <ul className="flex justify-center">
+              <li>
+                <img
+                  src={`https://img.pokemondb.net/sprites/home/normal/${chain.species.name}.png`}
+                  alt={chain.species.name}
+                />
+              </li>
+              {renderEvolutionChain(chain.evolves_to)}
+            </ul>
+          </section>
+        )}
+
+        <section className="space-y-4">
+          <SectionHeading>Moves</SectionHeading>
+          <ul className="grid grid-cols-5 gap-4">
             {moves.map(({ move }) => {
               return (
-                <tr key={move.name}>
-                  <td>{move.name}</td>
-                </tr>
+                <li
+                  key={move.name}
+                  className="px-6 py-4 text-center bg-gray-300 rounded-md"
+                >
+                  <span className="font-semibold text-gray-900 uppercase">
+                    {move.name}
+                  </span>
+                </li>
               );
             })}
-          </tbody>
-        </table>
-      </section>
-    </article>
+          </ul>
+        </section>
+      </article>
+    </div>
   );
 };
 

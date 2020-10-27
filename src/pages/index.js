@@ -20,8 +20,6 @@ const Pokemon = ({ name }) => {
     return <div className="rounded loading" />;
   }
 
-  console.log(status, data);
-
   const { types } = data.pokemon;
   const { names } = data.species;
 
