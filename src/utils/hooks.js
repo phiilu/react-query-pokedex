@@ -22,11 +22,6 @@ export const usePokemon = (name) => {
     pokemonSpeciesData && pokemonSpeciesData.evolution_chain.url,
     Api.evolutionChain
   );
-  const { status: typesStatus, data: typesData } = useTypes();
-
-  useEffect(() => {
-    console.log("types", typesStatus, typesData);
-  }, [typesStatus]);
 
   useEffect(() => {
     if (
@@ -65,9 +60,9 @@ export const usePokemon = (name) => {
   };
 };
 
-const useTypes = () => {
-  const { status, data } = useQuery(["types"], Api.types, {
-    staleTime: Infinity,
-  });
-  return { status, data };
-};
+// const useTypes = () => {
+//   const { status, data } = useQuery(["types"], Api.types, {
+//     staleTime: Infinity,
+//   });
+//   return { status, data };
+// };
